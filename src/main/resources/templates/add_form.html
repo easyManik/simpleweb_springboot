@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[[@{pageTitle}]]</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"  />
+</head>
+<body>
+<div class="container-fluid">
+    <div class="text-center"><h2>[[${pageTitle}]]</h2></div>
+    <div class="text-center"><h1>Form Karyawan</h1></div>
+
+    <form th:action="@{/karyawan/save}" method="post" th:object="${karyawan}"
+          style="max-width: 500px; margin: 0 auto;">
+        <input type="hidden" th:field="*{kode}">
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Nama Karyawan:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{nama}" class="form-control" required minlength="8" maxlength="45"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Tanggal Masuk Kerja:</label>
+                <div class="col-sm-8">
+                    <input type="date" th:field="*{tanggalMasuk}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Nomor Handphone:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{noHp}" class="form-control" required minlength="2" maxlength="45" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Limit Reimbursement:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{limitReimb}" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Created Date:</label>
+                <div class="col-sm-8">
+                    <input type="date" th:field="*{createdDate}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Updated Date:</label>
+                <div class="col-sm-8">
+                    <input type="date" th:field="*{updatedDate}" />
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary m-2">Save</button>
+                <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+<script type="text/javascript">
+    function cancelForm() {
+        window.location = "[[@{/karyawan}]]";
+    }
+</script>
+</body>
+</html>
