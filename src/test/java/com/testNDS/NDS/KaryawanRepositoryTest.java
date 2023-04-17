@@ -11,6 +11,7 @@ import org.springframework.test.annotation.Rollback;
 
 import java.sql.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -49,19 +50,19 @@ public class KaryawanRepositoryTest {
     @Test
     public void testUpdate(){
         String karyawanKode = "1";
-        Optional<Karyawan> optionalKaryawan = repo.findById(karyawanKode);
+        Optional<Karyawan> optionalKaryawan = repo.findById(UUID.fromString(karyawanKode));
         Karyawan karyawan = optionalKaryawan.get();
         karyawan.setNama("easy");
         repo.save(karyawan);
 
-        Karyawan updatedKaryawan = repo.findById(karyawanKode).get();
+        Karyawan updatedKaryawan = repo.findById(UUID.fromString(karyawanKode)).get();
         Assertions.assertThat(updatedKaryawan.getNama()).isEqualTo("easy");
     }
 
     @Test
     public void testGet(){
         String karyawanKode = "1";
-        Optional<Karyawan> optionalKaryawan = repo.findById(karyawanKode);
+        Optional<Karyawan> optionalKaryawan = repo.findById(UUID.fromString(karyawanKode));
         Assertions.assertThat(optionalKaryawan).isPresent();
         System.out.println(optionalKaryawan.get());
     }
@@ -69,8 +70,8 @@ public class KaryawanRepositoryTest {
     @Test
     public void testDelete(){
         String karyawanKode= "1";
-        repo.deleteById(karyawanKode);
-        Optional<Karyawan> optionalKaryawan = repo.findById(karyawanKode);
+        repo.deleteById(UUID.fromString(karyawanKode));
+        Optional<Karyawan> optionalKaryawan = repo.findById(UUID.fromString(karyawanKode));
         Assertions.assertThat(optionalKaryawan).isNotPresent();
 
     }
