@@ -38,7 +38,7 @@ public class KaryawanController {
     }
 
     @GetMapping("/karyawan/edit/{kode}")
-    public String showEditForm(@PathVariable("kode") String kode, Model model, RedirectAttributes ra){
+    public String showEditForm(@PathVariable("kode") Long kode, Model model, RedirectAttributes ra){
         try{
             Karyawan karyawan = service.get(kode);
             model.addAttribute("karyawan", karyawan);
@@ -51,7 +51,7 @@ public class KaryawanController {
     }
 
     @GetMapping("/karyawan/delete/{kode}")
-    public String deleteUser(@PathVariable("kode") String kode, RedirectAttributes ra) {
+    public String deleteUser(@PathVariable("kode") Long kode, RedirectAttributes ra) {
         service.delete(kode);
         ra.addFlashAttribute("message", "The Karyawan Code " + kode + " has been deleted.");
         return "redirect:/karyawan";

@@ -2,6 +2,7 @@ package com.testNDS.NDS.karyawan;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.yaml.snakeyaml.tokens.Token;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,16 +21,16 @@ public class KaryawanService {
         repo.save(karyawan);
     }
 
-    public Karyawan get(String kode) throws NotFoundException {
-        Optional<Karyawan> result = repo.findById(UUID.fromString(kode));
+    public Karyawan get(Long kode) throws NotFoundException {
+        Optional<Karyawan> result = repo.findById(kode);
         if(result.isPresent()){
             return result.get();
         }
         throw new NotFoundException("No Kode Found" + kode);
     }
 
-    public void delete(String kode){
-        repo.deleteById(UUID.fromString(kode));
+    public void delete(Long kode){
+        repo.deleteById(kode);
     }
 
     public List<Karyawan> getAll(){
